@@ -1,5 +1,4 @@
 // src/pages/index.tsx
-"use client";
 
 import React from "react";
 import Layout from "../layout";
@@ -13,10 +12,10 @@ const HomePage: React.FC = () => {
   return (
     <Layout>
       <Hero />
-      <About />
-      <Services />
       <Clients />
+      <About />
       <Stats />
+      <Services />
     </Layout>
   );
 };
