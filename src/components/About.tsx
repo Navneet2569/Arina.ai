@@ -2,8 +2,8 @@
 "use client";
 
 import React from "react";
-import "bootstrap-icons/font/bootstrap-icons.css"; // Ensure this is imported
-import "aos/dist/aos.css"; // Ensure this is imported
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "aos/dist/aos.css";
 
 const About: React.FC = () => {
   return (
