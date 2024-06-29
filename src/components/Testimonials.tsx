@@ -1,9 +1,6 @@
 import React from "react";
-import SwiperCore, { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
-
-SwiperCore.use([Pagination]);
 
 const Testimonials: React.FC = () => {
   const testimonials = [
