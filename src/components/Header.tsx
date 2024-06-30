@@ -1,34 +1,43 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
 const Header: React.FC = () => {
   return (
     <header id="header" className="header d-flex align-items-center sticky-top">
       <div className="container-fluid container-xl position-relative d-flex align-items-center">
-        <a href="index.html" className="logo d-flex align-items-center me-auto">
-          {/* <img src="assets/img/logo.png" alt="logo" /> */}
-          <h1 className="sitename">Vesperr</h1>
-        </a>
+        <Link href="/" legacyBehavior>
+          <a className="logo d-flex align-items-center me-auto">
+            {/* <img src="assets/img/logo.png" alt="logo" /> */}
+            <h1 className="sitename">Vesperr</h1>
+          </a>
+        </Link>
 
         <nav id="navmenu" className="navmenu">
           <ul>
             <li>
-              <a href="#hero" className="active">
-                Home
-              </a>
+              <Link href="/" legacyBehavior>
+                <a className="active">Home</a>
+              </Link>
             </li>
             <li>
-              <a href="#about">About</a>
+              <Link href="#about" legacyBehavior>
+                <a>About</a>
+              </Link>
             </li>
             <li>
-              <a href="#services">Services</a>
+              <Link href="#services" legacyBehavior>
+                <a>Services</a>
+              </Link>
             </li>
             <li>
               <a href="#portfolio">Portfolio</a>
             </li>
             <li>
-              <a href="#team">Team</a>
+              <Link href="#team" legacyBehavior>
+                <a>Team</a>
+              </Link>
             </li>
             <li className="dropdown">
               <a href="#">
@@ -74,15 +83,16 @@ const Header: React.FC = () => {
               </ul>
             </li>
             <li>
-              <a href="#contact">Contact</a>
+              <Link href="/#contact" legacyBehavior>
+                <a>Contact</a>
+              </Link>
             </li>
           </ul>
           <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
-
-        <a className="btn-getstarted" href="index.html#about">
-          Get Started
-        </a>
+        <Link href="/" legacyBehavior>
+          <a className="btn-getstarted">Get Started</a>
+        </Link>
       </div>
     </header>
   );

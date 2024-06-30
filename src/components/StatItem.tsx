@@ -44,7 +44,7 @@ const StatItem: React.FC<StatItemProps> = ({
     if (countingStarted) {
       let start = 0;
       const endValue = end;
-      const duration = 2000; // 2 seconds
+      const duration = 300;
       const stepTime = Math.abs(Math.floor(duration / endValue));
 
       const timer = setInterval(() => {

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const services = [
   {
@@ -56,9 +57,9 @@ const AltServicesSection: React.FC = () => {
                   />
                 </div>
                 <div className="details">
-                  <a href="service-details.html" className="stretched-link">
-                    <h3>{service.title}</h3>
-                  </a>
+                  <Link href="/service-details">
+                    <h3 className="stretched-link">{service.title}</h3>
+                  </Link>
                   <p>{service.description}</p>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface PortfolioItemProps {
   category: string;
@@ -41,9 +42,11 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
           >
             <i className="bi bi-zoom-in"></i>
           </a>
-          <a href={detailsLink} title="More Details" className="details-link">
-            <i className="bi bi-link-45deg"></i>
-          </a>
+          <Link href={detailsLink} legacyBehavior>
+            <a title="More Details" className="details-link">
+              <i className="bi bi-link-45deg"></i>
+            </a>
+          </Link>
         </div>
       </div>
     </div>

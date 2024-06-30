@@ -7,7 +7,7 @@ const portfolioItems = [
     title: "App 1",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/app-1.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-app",
   },
   {
@@ -15,7 +15,7 @@ const portfolioItems = [
     title: "Product 1",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/product-1.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-product",
   },
   {
@@ -23,7 +23,7 @@ const portfolioItems = [
     title: "Branding 1",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/branding-1.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-branding",
   },
   {
@@ -31,7 +31,7 @@ const portfolioItems = [
     title: "Books 1",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/books-1.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-book",
   },
   {
@@ -39,7 +39,7 @@ const portfolioItems = [
     title: "App 2",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/app-2.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-app",
   },
   {
@@ -47,7 +47,7 @@ const portfolioItems = [
     title: "Product 2",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/product-2.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-product",
   },
   {
@@ -55,7 +55,7 @@ const portfolioItems = [
     title: "Branding 2",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/branding-2.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-branding",
   },
   {
@@ -63,7 +63,7 @@ const portfolioItems = [
     title: "Books 2",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/books-2.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-book",
   },
   {
@@ -71,7 +71,7 @@ const portfolioItems = [
     title: "App 3",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/app-3.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-app",
   },
   {
@@ -79,7 +79,7 @@ const portfolioItems = [
     title: "Product 3",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/product-3.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-product",
   },
   {
@@ -87,7 +87,7 @@ const portfolioItems = [
     title: "Branding 3",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/branding-3.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-branding",
   },
   {
@@ -95,7 +95,7 @@ const portfolioItems = [
     title: "Books 3",
     description: "Lorem ipsum, dolor sit amet consectetur",
     image: "/assets/img/portfolio/books-3.jpg",
-    detailsLink: "portfolio-details.html",
+    detailsLink: "/portfolio-details",
     gallery: "portfolio-gallery-book",
   },
 ];

@@ -1,52 +1,6 @@
 import React from "react";
 import Image from "next/image";
 
-interface TeamMemberProps {
-  name: string;
-  role: string;
-  imgSrc: string;
-}
-
-const TeamMember: React.FC<TeamMemberProps> = ({ name, role, imgSrc }) => {
-  return (
-    <div
-      className="col-lg-3 col-md-6 d-flex align-items-stretch"
-      data-aos="fade-up"
-      data-aos-delay="100"
-    >
-      <div className="team-member">
-        <div className="member-img">
-          <Image
-            src={imgSrc}
-            alt={`Team Member ${name}`}
-            width={400}
-            height={400}
-            className="img-fluid"
-          />
-          <div className="social">
-            <a href="#">
-              <i className="bi bi-twitter-x"></i>
-            </a>
-            <a href="#">
-              <i className="bi bi-facebook"></i>
-            </a>
-            <a href="#">
-              <i className="bi bi-instagram"></i>
-            </a>
-            <a href="#">
-              <i className="bi bi-linkedin"></i>
-            </a>
-          </div>
-        </div>
-        <div className="member-info">
-          <h4>{name}</h4>
-          <span>{role}</span>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const Team: React.FC = () => {
   const teamMembers = [
     {
@@ -97,3 +51,49 @@ const Team: React.FC = () => {
 };
 
 export default Team;
+
+interface TeamMemberProps {
+  name: string;
+  role: string;
+  imgSrc: string;
+}
+
+const TeamMember: React.FC<TeamMemberProps> = ({ name, role, imgSrc }) => {
+  return (
+    <div
+      className="col-lg-3 col-md-6 d-flex align-items-stretch"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <div className="team-member">
+        <div className="member-img">
+          <Image
+            src={imgSrc}
+            alt={`Team Member ${name}`}
+            width={400}
+            height={400}
+            className="img-fluid"
+          />
+          <div className="social">
+            <a href="#">
+              <i className="bi bi-twitter-x"></i>
+            </a>
+            <a href="#">
+              <i className="bi bi-facebook"></i>
+            </a>
+            <a href="#">
+              <i className="bi bi-instagram"></i>
+            </a>
+            <a href="#">
+              <i className="bi bi-linkedin"></i>
+            </a>
+          </div>
+        </div>
+        <div className="member-info">
+          <h4>{name}</h4>
+          <span>{role}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
