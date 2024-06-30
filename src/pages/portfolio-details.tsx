@@ -1,5 +1,3 @@
-// PortfolioDetails.tsx
-
 import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,11 +7,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
-// Initialize Swiper core components
 SwiperCore.use([Pagination, Autoplay]);
 
 const PortfolioDetails: React.FC = () => {
-  // Portfolio images data
   const portfolioImages = [
     {
       src: "/assets/img/portfolio/app-1.jpg",
@@ -36,7 +32,7 @@ const PortfolioDetails: React.FC = () => {
   return (
     <>
       <Header />
-      {/* Page Title */}
+
       <div className="page-title" data-aos="fade">
         <div className="container">
           <nav className="breadcrumbs">
@@ -52,9 +48,7 @@ const PortfolioDetails: React.FC = () => {
           <h1>Portfolio Details</h1>
         </div>
       </div>
-      {/* End Page Title */}
 
-      {/* Portfolio Details Section */}
       <section
         id="portfolio-details"
         className="portfolio-details section"
@@ -133,7 +127,7 @@ const PortfolioDetails: React.FC = () => {
           </div>
         </div>
       </section>
-      {/* End Portfolio Details Section */}
+
       <Footer />
     </>
   );

@@ -26,7 +26,7 @@ const StatItem: React.FC<StatItemProps> = ({
           }
         });
       },
-      { threshold: 0.5 } // Adjust threshold as needed
+      { threshold: 0.5 }
     );
 
     if (statsRef.current) {

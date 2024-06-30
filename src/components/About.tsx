@@ -1,5 +1,3 @@
-// src/components/AboutSection.tsx
-
 import React from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "aos/dist/aos.css";
@@ -7,7 +5,6 @@ import "aos/dist/aos.css";
 const AboutSection: React.FC = () => {
   return (
     <section id="about" className="about section">
-      {/* Section Title */}
       <div className="container section-title" data-aos="fade-up">
         <h2>About Us</h2>
         <p>
@@ -15,7 +12,6 @@ const AboutSection: React.FC = () => {
           consectetur velit
         </p>
       </div>
-      {/* End Section Title */}
 
       <div className="container">
         <div className="row gy-5">

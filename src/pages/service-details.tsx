@@ -1,5 +1,3 @@
-// components/ServiceDetails.tsx
-
 import React from "react";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -11,7 +9,6 @@ const ServiceDetails: React.FC = () => {
     <>
       <Header />
       <main className="main">
-        {/* Page Title */}
         <div className="page-title" data-aos="fade">
           <div className="container">
             <nav className="breadcrumbs">
@@ -28,9 +25,7 @@ const ServiceDetails: React.FC = () => {
             <h1>Service Details</h1>
           </div>
         </div>
-        {/* End Page Title */}
 
-        {/* Service Details Section */}
         <section id="service-details" className="service-details section">
           <div className="container">
             <div className="row gy-4">
@@ -108,7 +103,6 @@ const ServiceDetails: React.FC = () => {
             </div>
           </div>
         </section>
-        {/* End Service Details Section */}
       </main>
       <Footer />
     </>

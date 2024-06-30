@@ -1,5 +1,3 @@
-// components/FAQ.tsx
-
 import React from "react";
 
 interface FAQItemProps {
@@ -59,7 +57,6 @@ const FAQ: React.FC = () => {
 
   return (
     <section id="faq" className="faq section">
-      {/* Section Title */}
       <div className="container section-title" data-aos="fade-up">
         <h2>Frequently Asked Questions</h2>
         <p>
@@ -67,7 +64,6 @@ const FAQ: React.FC = () => {
           consectetur velit
         </p>
       </div>
-      {/* End Section Title */}
 
       <div className="container">
         {faqData.map((item, index) => (

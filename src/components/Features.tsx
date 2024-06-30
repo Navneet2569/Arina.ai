@@ -1,5 +1,3 @@
-// components/FeaturesSection.tsx
-
 import React from "react";
 
 interface FeatureItemProps {
@@ -51,7 +49,6 @@ const FeaturesSection: React.FC = () => {
 
   return (
     <section id="features" className="features section">
-      {/* Section Title */}
       <div className="container section-title" data-aos="fade-up">
         <h2>Features</h2>
         <p>
@@ -59,7 +56,6 @@ const FeaturesSection: React.FC = () => {
           consectetur velit
         </p>
       </div>
-      {/* End Section Title */}
 
       <div className="container">
         <div className="row gy-4">

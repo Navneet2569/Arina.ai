@@ -4,7 +4,6 @@ import SwiperCore from "swiper";
 import { Autoplay, Pagination } from "swiper/modules";
 import Image from "next/image";
 
-// Install Swiper modules
 SwiperCore.use([Autoplay, Pagination]);
 
 const Testimonials: React.FC = () => {

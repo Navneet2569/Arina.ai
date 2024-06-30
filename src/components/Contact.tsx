@@ -1,5 +1,6 @@
-// components/Contact.tsx
 import React, { useState } from "react";
+import { db } from "@/firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -17,12 +18,18 @@ const Contact: React.FC = () => {
     event.preventDefault();
     setFormStatus("loading");
 
-    // Simulating form submission delay (replace with actual logic)
     try {
-      // Example: Simulate API call with setTimeout
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const docRef = await addDoc(collection(db, "contacts"), formData);
+      console.log("Document written with ID: ", docRef.id);
       setFormStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
     } catch (error) {
+      console.error("Error adding document: ", error);
       setFormStatus("error");
     }
   };
@@ -36,7 +43,6 @@ const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="contact section">
-      {/* Section Title */}
       <div className="container section-title" data-aos="fade-up">
         <h2>Contact</h2>
         <p>
@@ -44,7 +50,6 @@ const Contact: React.FC = () => {
           consectetur velit
         </p>
       </div>
-      {/* End Section Title */}
 
       <div
         className="container position-relative"
@@ -52,7 +57,6 @@ const Contact: React.FC = () => {
         data-aos-delay="100"
       >
         <div className="row gy-4">
-          {/* Contact Information */}
           <div className="col-lg-5">
             <div
               className="info-item d-flex"
@@ -88,9 +92,7 @@ const Contact: React.FC = () => {
               </div>
             </div>
           </div>
-          {/* End Contact Information */}
 
-          {/* Contact Form */}
           <div className="col-lg-7">
             <form
               onSubmit={handleSubmit}
@@ -164,7 +166,6 @@ const Contact: React.FC = () => {
               </div>
             </form>
           </div>
-          {/* End Contact Form */}
         </div>
       </div>
     </section>

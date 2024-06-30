@@ -42,14 +42,13 @@ const Stats: React.FC = () => {
           }
         });
       },
-      { threshold: 0.5 } // Adjust threshold as needed
+      { threshold: 0.5 }
     );
 
     if (statsRef.current) {
       observer.observe(statsRef.current);
     }
 
-    // Clean up observer
     return () => {
       if (statsRef.current) {
         observer.unobserve(statsRef.current);
