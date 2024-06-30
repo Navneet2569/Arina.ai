@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import CountUp from "react-countup";
+import React, { useEffect, useRef, useState } from "react";
 
 interface StatItemProps {
   icon: string;
@@ -14,26 +13,58 @@ const StatItem: React.FC<StatItemProps> = ({
   title,
   description,
 }) => {
-  const countUpRef = useRef<CountUp>(null);
+  const [count, setCount] = useState(0);
+  const [countingStarted, setCountingStarted] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (countUpRef.current && end > 0) {
-      countUpRef.current.start();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setCountingStarted(true);
+          }
+        });
+      },
+      { threshold: 0.5 } // Adjust threshold as needed
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
     }
-  }, [end]);
+
+    return () => {
+      if (statsRef.current) {
+        observer.unobserve(statsRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (countingStarted) {
+      let start = 0;
+      const endValue = end;
+      const duration = 2000; // 2 seconds
+      const stepTime = Math.abs(Math.floor(duration / endValue));
+
+      const timer = setInterval(() => {
+        start += 1;
+        setCount(start);
+        if (start >= endValue) {
+          clearInterval(timer);
+        }
+      }, stepTime);
+
+      return () => clearInterval(timer);
+    }
+  }, [countingStarted, end]);
 
   return (
-    <div className="col-lg-6">
+    <div ref={statsRef} className="col-lg-6">
       <div className="stats-item d-flex">
         <i className={`bi ${icon} flex-shrink-0`}></i>
         <div>
-          <CountUp
-            ref={countUpRef}
-            start={0}
-            end={end}
-            duration={2}
-            className="purecounter"
-          />
+          <span className="purecounter">{count}</span>
           <p>
             <strong>{title}</strong> <span>{description}</span>
           </p>
