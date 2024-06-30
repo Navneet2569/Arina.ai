@@ -2,7 +2,53 @@
 
 import React from "react";
 
-const Features: React.FC = () => {
+interface FeatureItemProps {
+  iconClass: string;
+  color: string;
+  title: string;
+}
+
+const FeatureItem: React.FC<FeatureItemProps> = ({
+  iconClass,
+  color,
+  title,
+}) => (
+  <div className="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
+    <div className="features-item">
+      <i className={`bi ${iconClass}`} style={{ color }}></i>
+      <h3>
+        <a href="#" className="stretched-link">
+          {title}
+        </a>
+      </h3>
+    </div>
+  </div>
+);
+
+const FeaturesSection: React.FC = () => {
+  const featureItems: FeatureItemProps[] = [
+    { iconClass: "bi-eye", color: "#ffbb2c", title: "Lorem Ipsum" },
+    { iconClass: "bi-infinity", color: "#5578ff", title: "Dolor Sitema" },
+    {
+      iconClass: "bi-mortarboard",
+      color: "#e80368",
+      title: "Sed perspiciatis",
+    },
+    { iconClass: "bi-nut", color: "#e361ff", title: "Magni Dolores" },
+    { iconClass: "bi-shuffle", color: "#47aeff", title: "Nemo Enim" },
+    { iconClass: "bi-star", color: "#ffa76e", title: "Eiusmod Tempor" },
+    { iconClass: "bi-x-diamond", color: "#11dbcf", title: "Midela Teren" },
+    { iconClass: "bi-camera-video", color: "#4233ff", title: "Pira Neve" },
+    { iconClass: "bi-command", color: "#b2904f", title: "Dirada Pack" },
+    { iconClass: "bi-dribbble", color: "#b20969", title: "Moton Ideal" },
+    { iconClass: "bi-activity", color: "#ff5828", title: "Verdo Park" },
+    {
+      iconClass: "bi-brightness-high",
+      color: "#29cc61",
+      title: "Flavor Nivelanda",
+    },
+  ];
+
   return (
     <section id="features" className="features section">
       {/* Section Title */}
@@ -17,197 +63,18 @@ const Features: React.FC = () => {
 
       <div className="container">
         <div className="row gy-4">
-          {/* Feature Items */}
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <div className="features-item">
-              <i className="bi bi-eye" style={{ color: "#ffbb2c" }}></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Lorem Ipsum
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div className="features-item">
-              <i className="bi bi-infinity" style={{ color: "#5578ff" }}></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Dolor Sitema
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            <div className="features-item">
-              <i className="bi bi-mortarboard" style={{ color: "#e80368" }}></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Sed perspiciatis
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          >
-            <div className="features-item">
-              <i className="bi bi-nut" style={{ color: "#e361ff" }}></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Magni Dolores
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="500"
-          >
-            <div className="features-item">
-              <i className="bi bi-shuffle" style={{ color: "#47aeff" }}></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Nemo Enim
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="600"
-          >
-            <div className="features-item">
-              <i className="bi bi-star" style={{ color: "#ffa76e" }}></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Eiusmod Tempor
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="700"
-          >
-            <div className="features-item">
-              <i className="bi bi-x-diamond" style={{ color: "#11dbcf" }}></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Midela Teren
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="800"
-          >
-            <div className="features-item">
-              <i
-                className="bi bi-camera-video"
-                style={{ color: "#4233ff" }}
-              ></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Pira Neve
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="900"
-          >
-            <div className="features-item">
-              <i className="bi bi-command" style={{ color: "#b2904f" }}></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Dirada Pack
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="1000"
-          >
-            <div className="features-item">
-              <i className="bi bi-dribbble" style={{ color: "#b20969" }}></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Moton Ideal
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="1100"
-          >
-            <div className="features-item">
-              <i className="bi bi-activity" style={{ color: "#ff5828" }}></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Verdo Park
-                </a>
-              </h3>
-            </div>
-          </div>
-
-          <div
-            className="col-lg-3 col-md-4"
-            data-aos="fade-up"
-            data-aos-delay="1200"
-          >
-            <div className="features-item">
-              <i
-                className="bi bi-brightness-high"
-                style={{ color: "#29cc61" }}
-              ></i>
-              <h3>
-                <a href="" className="stretched-link">
-                  Flavor Nivelanda
-                </a>
-              </h3>
-            </div>
-          </div>
-          {/* End Feature Items */}
+          {featureItems.map((item, index) => (
+            <FeatureItem
+              key={index}
+              iconClass={item.iconClass}
+              color={item.color}
+              title={item.title}
+            />
+          ))}
         </div>
       </div>
     </section>
   );
 };
 
-export default Features;
+export default FeaturesSection;

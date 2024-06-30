@@ -1,13 +1,18 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper";
+import { Autoplay, Pagination } from "swiper/modules";
 import Image from "next/image";
+
+// Install Swiper modules
+SwiperCore.use([Autoplay, Pagination]);
 
 const Testimonials: React.FC = () => {
   const testimonials = [
     {
       imgSrc: "/assets/img/testimonials/testimonials-1.jpg",
       name: "Saul Goodman",
-      role: "Ceo & Founder",
+      role: "CEO & Founder",
       stars: 5,
       quote:
         "Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.",
@@ -66,29 +71,27 @@ const Testimonials: React.FC = () => {
         >
           {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index}>
-              <div className="swiper-slide">
-                <div className="testimonial-wrap">
-                  <div className="testimonial-item">
-                    <Image
-                      src={testimonial.imgSrc}
-                      className="testimonial-img"
-                      alt=""
-                      width={100}
-                      height={100}
-                    />
-                    <h3>{testimonial.name}</h3>
-                    <h4>{testimonial.role}</h4>
-                    <div className="stars">
-                      {[...Array(testimonial.stars)].map((star, i) => (
-                        <i key={i} className="bi bi-star-fill"></i>
-                      ))}
-                    </div>
-                    <p>
-                      <i className="bi bi-quote quote-icon-left"></i>
-                      <span>{testimonial.quote}</span>
-                      <i className="bi bi-quote quote-icon-right"></i>
-                    </p>
+              <div className="testimonial-wrap">
+                <div className="testimonial-item">
+                  <Image
+                    src={testimonial.imgSrc}
+                    className="testimonial-img"
+                    alt=""
+                    width={100}
+                    height={100}
+                  />
+                  <h3>{testimonial.name}</h3>
+                  <h4>{testimonial.role}</h4>
+                  <div className="stars">
+                    {[...Array(testimonial.stars)].map((star, i) => (
+                      <i key={i} className="bi bi-star-fill"></i>
+                    ))}
                   </div>
+                  <p>
+                    <i className="bi bi-quote quote-icon-left"></i>
+                    <span>{testimonial.quote}</span>
+                    <i className="bi bi-quote quote-icon-right"></i>
+                  </p>
                 </div>
               </div>
             </SwiperSlide>

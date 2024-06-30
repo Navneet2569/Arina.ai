@@ -1,10 +1,38 @@
 // components/Contact.tsx
 
-const Contact = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+import React, { useState } from "react";
+
+const Contact: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [formStatus, setFormStatus] = useState<
+    "idle" | "loading" | "error" | "success"
+  >("idle");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Handle form submission logic here
-    // Example: send data to an API or handle form validation
+    setFormStatus("loading");
+
+    // Simulating form submission delay (replace with actual logic)
+    try {
+      // Example: Simulate API call with setTimeout
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      setFormStatus("success");
+    } catch (error) {
+      setFormStatus("error");
+    }
+  };
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
@@ -25,6 +53,7 @@ const Contact = () => {
         data-aos-delay="100"
       >
         <div className="row gy-4">
+          {/* Contact Information */}
           <div className="col-lg-5">
             <div
               className="info-item d-flex"
@@ -37,8 +66,6 @@ const Contact = () => {
                 <p>A108 Adam Street, New York, NY 535022</p>
               </div>
             </div>
-            {/* End Info Item */}
-
             <div
               className="info-item d-flex"
               data-aos="fade-up"
@@ -50,8 +77,6 @@ const Contact = () => {
                 <p>+1 5589 55488 55</p>
               </div>
             </div>
-            {/* End Info Item */}
-
             <div
               className="info-item d-flex"
               data-aos="fade-up"
@@ -63,9 +88,10 @@ const Contact = () => {
                 <p>info@example.com</p>
               </div>
             </div>
-            {/* End Info Item */}
           </div>
+          {/* End Contact Information */}
 
+          {/* Contact Form */}
           <div className="col-lg-7">
             <form
               onSubmit={handleSubmit}
@@ -78,50 +104,63 @@ const Contact = () => {
                   <input
                     type="text"
                     name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     className="form-control"
                     placeholder="Your Name"
                     required
                   />
                 </div>
-
                 <div className="col-md-6">
                   <input
                     type="email"
-                    className="form-control"
                     name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="form-control"
                     placeholder="Your Email"
                     required
                   />
                 </div>
-
                 <div className="col-md-12">
                   <input
                     type="text"
-                    className="form-control"
                     name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="form-control"
                     placeholder="Subject"
                     required
                   />
                 </div>
-
                 <div className="col-md-12">
                   <textarea
-                    className="form-control"
                     name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="form-control"
                     rows={6}
                     placeholder="Message"
                     required
                   ></textarea>
                 </div>
-
                 <div className="col-md-12 text-center">
-                  <div className="loading">Loading</div>
-                  <div className="error-message"></div>
-                  <div className="sent-message">
-                    Your message has been sent. Thank you!
-                  </div>
-
-                  <button type="submit">Send Message</button>
+                  {formStatus === "loading" && (
+                    <div className="loading">Loading</div>
+                  )}
+                  {formStatus === "error" && (
+                    <div className="error-message">
+                      An error occurred. Please try again later.
+                    </div>
+                  )}
+                  {formStatus === "success" && (
+                    <div className="sent-message">
+                      Your message has been sent. Thank you!
+                    </div>
+                  )}
+                  {formStatus === "idle" && (
+                    <button type="submit">Send Message</button>
+                  )}
                 </div>
               </div>
             </form>

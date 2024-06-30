@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-// src/components/About.tsx
 "use client";
 
 import React from "react";
@@ -12,7 +11,7 @@ const Hero: React.FC = () => {
           <div className="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
             <h1>Grow your business with Vesperr</h1>
             <p>
-              We are team of talented designers making websites with Bootstrap
+              We are a team of talented designers making websites with Bootstrap
             </p>
             <div className="d-flex">
               <a href="#about" className="btn-get-started">

@@ -1,11 +1,10 @@
 // src/components/AboutSection.tsx
-"use client";
 
 import React from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "aos/dist/aos.css";
 
-const About: React.FC = () => {
+const AboutSection: React.FC = () => {
   return (
     <section id="about" className="about section">
       {/* Section Title */}
@@ -41,61 +40,25 @@ const About: React.FC = () => {
 
           <div className="col-xl-7" data-aos="fade-up" data-aos-delay="200">
             <div className="row gy-4">
-              <div className="col-md-6 icon-box position-relative">
-                <i className="bi bi-briefcase"></i>
-                <h4>
-                  <a href="#" className="stretched-link">
-                    Corporis voluptates sit
-                  </a>
-                </h4>
-                <p>
-                  Consequuntur sunt aut quasi enim aliquam quae harum pariatur
-                  laboris nisi ut aliquip
-                </p>
-              </div>
-              {/* Icon-Box */}
+              <IconBox icon="bi-briefcase" title="Corporis voluptates sit">
+                Consequuntur sunt aut quasi enim aliquam quae harum pariatur
+                laboris nisi ut aliquip
+              </IconBox>
 
-              <div className="col-md-6 icon-box position-relative">
-                <i className="bi bi-gem"></i>
-                <h4>
-                  <a href="#" className="stretched-link">
-                    Ullamco laboris nisi
-                  </a>
-                </h4>
-                <p>
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt
-                </p>
-              </div>
-              {/* Icon-Box */}
+              <IconBox icon="bi-gem" title="Ullamco laboris nisi">
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                qui officia deserunt
+              </IconBox>
 
-              <div className="col-md-6 icon-box position-relative">
-                <i className="bi bi-broadcast"></i>
-                <h4>
-                  <a href="#" className="stretched-link">
-                    Labore consequatur
-                  </a>
-                </h4>
-                <p>
-                  Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut
-                  maiores omnis facere
-                </p>
-              </div>
-              {/* Icon-Box */}
+              <IconBox icon="bi-broadcast" title="Labore consequatur">
+                Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut
+                maiores omnis facere
+              </IconBox>
 
-              <div className="col-md-6 icon-box position-relative">
-                <i className="bi bi-easel"></i>
-                <h4>
-                  <a href="#" className="stretched-link">
-                    Beatae veritatis
-                  </a>
-                </h4>
-                <p>
-                  Expedita veritatis consequuntur nihil tempore laudantium vitae
-                  denat pacta
-                </p>
-              </div>
-              {/* Icon-Box */}
+              <IconBox icon="bi-easel" title="Beatae veritatis">
+                Expedita veritatis consequuntur nihil tempore laudantium vitae
+                denat pacta
+              </IconBox>
             </div>
           </div>
         </div>
@@ -104,4 +67,24 @@ const About: React.FC = () => {
   );
 };
 
-export default About;
+type IconBoxProps = {
+  icon: string;
+  title: string;
+  children: React.ReactNode;
+};
+
+const IconBox: React.FC<IconBoxProps> = ({ icon, title, children }) => {
+  return (
+    <div className="col-md-6 icon-box position-relative" data-aos="fade-up">
+      <i className={`bi ${icon}`}></i>
+      <h4>
+        <a href="#" className="stretched-link">
+          {title}
+        </a>
+      </h4>
+      <p>{children}</p>
+    </div>
+  );
+};
+
+export default AboutSection;

@@ -1,11 +1,78 @@
-// components/Team.js
-
+import React from "react";
 import Image from "next/image";
 
-const Team = () => {
+interface TeamMemberProps {
+  name: string;
+  role: string;
+  imgSrc: string;
+}
+
+const TeamMember: React.FC<TeamMemberProps> = ({ name, role, imgSrc }) => {
+  return (
+    <div
+      className="col-lg-3 col-md-6 d-flex align-items-stretch"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <div className="team-member">
+        <div className="member-img">
+          <Image
+            src={imgSrc}
+            alt={`Team Member ${name}`}
+            width={400}
+            height={400}
+            className="img-fluid"
+          />
+          <div className="social">
+            <a href="#">
+              <i className="bi bi-twitter-x"></i>
+            </a>
+            <a href="#">
+              <i className="bi bi-facebook"></i>
+            </a>
+            <a href="#">
+              <i className="bi bi-instagram"></i>
+            </a>
+            <a href="#">
+              <i className="bi bi-linkedin"></i>
+            </a>
+          </div>
+        </div>
+        <div className="member-info">
+          <h4>{name}</h4>
+          <span>{role}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Team: React.FC = () => {
+  const teamMembers = [
+    {
+      name: "Walter White",
+      role: "Chief Executive Officer",
+      imgSrc: "/assets/img/team/team-1.jpg",
+    },
+    {
+      name: "Sarah Johnson",
+      role: "Product Manager",
+      imgSrc: "/assets/img/team/team-2.jpg",
+    },
+    {
+      name: "William Anderson",
+      role: "CTO",
+      imgSrc: "/assets/img/team/team-3.jpg",
+    },
+    {
+      name: "Amanda Jepson",
+      role: "Accountant",
+      imgSrc: "/assets/img/team/team-4.jpg",
+    },
+  ];
+
   return (
     <section id="team" className="team section">
-      {/* Section Title */}
       <div className="container section-title" data-aos="fade-up">
         <h2>Team</h2>
         <p>
@@ -13,157 +80,16 @@ const Team = () => {
           consectetur velit
         </p>
       </div>
-      {/* End Section Title */}
-
       <div className="container">
         <div className="row gy-4">
-          <div
-            className="col-lg-3 col-md-6 d-flex align-items-stretch"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <div className="team-member">
-              <div className="member-img">
-                <Image
-                  src="/assets/img/team/team-1.jpg"
-                  alt="Team Member 1"
-                  width={400}
-                  height={400}
-                  className="img-fluid"
-                />
-                <div className="social">
-                  <a href="">
-                    <i className="bi bi-twitter-x"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-facebook"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-instagram"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                </div>
-              </div>
-              <div className="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Executive Officer</span>
-              </div>
-            </div>
-          </div>
-          {/* End Team Member */}
-
-          <div
-            className="col-lg-3 col-md-6 d-flex align-items-stretch"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <div className="team-member">
-              <div className="member-img">
-                <Image
-                  src="/assets/img/team/team-2.jpg"
-                  alt="Team Member 2"
-                  width={400}
-                  height={400}
-                  className="img-fluid"
-                />
-                <div className="social">
-                  <a href="">
-                    <i className="bi bi-twitter-x"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-facebook"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-instagram"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                </div>
-              </div>
-              <div className="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Product Manager</span>
-              </div>
-            </div>
-          </div>
-          {/* End Team Member */}
-
-          <div
-            className="col-lg-3 col-md-6 d-flex align-items-stretch"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            <div className="team-member">
-              <div className="member-img">
-                <Image
-                  src="/assets/img/team/team-3.jpg"
-                  alt="Team Member 3"
-                  width={400}
-                  height={400}
-                  className="img-fluid"
-                />
-                <div className="social">
-                  <a href="">
-                    <i className="bi bi-twitter-x"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-facebook"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-instagram"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                </div>
-              </div>
-              <div className="member-info">
-                <h4>William Anderson</h4>
-                <span>CTO</span>
-              </div>
-            </div>
-          </div>
-          {/* End Team Member */}
-
-          <div
-            className="col-lg-3 col-md-6 d-flex align-items-stretch"
-            data-aos="fade-up"
-            data-aos-delay="400"
-          >
-            <div className="team-member">
-              <div className="member-img">
-                <Image
-                  src="/assets/img/team/team-4.jpg"
-                  alt="Team Member 4"
-                  width={400}
-                  height={400}
-                  className="img-fluid"
-                />
-                <div className="social">
-                  <a href="">
-                    <i className="bi bi-twitter-x"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-facebook"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-instagram"></i>
-                  </a>
-                  <a href="">
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                </div>
-              </div>
-              <div className="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Accountant</span>
-              </div>
-            </div>
-          </div>
-          {/* End Team Member */}
+          {teamMembers.map((member, index) => (
+            <TeamMember
+              key={index}
+              name={member.name}
+              role={member.role}
+              imgSrc={member.imgSrc}
+            />
+          ))}
         </div>
       </div>
     </section>

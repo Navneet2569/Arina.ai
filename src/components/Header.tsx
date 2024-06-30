@@ -1,4 +1,3 @@
-// src/components/Header.tsx
 "use client";
 
 import React from "react";
@@ -8,7 +7,7 @@ const Header: React.FC = () => {
     <header id="header" className="header d-flex align-items-center sticky-top">
       <div className="container-fluid container-xl position-relative d-flex align-items-center">
         <a href="index.html" className="logo d-flex align-items-center me-auto">
-          {/* <img src="assets/img/logo.png" alt=""> */}
+          {/* <img src="assets/img/logo.png" alt="logo" /> */}
           <h1 className="sitename">Vesperr</h1>
         </a>
 
@@ -17,7 +16,6 @@ const Header: React.FC = () => {
             <li>
               <a href="#hero" className="active">
                 Home
-                <br />
               </a>
             </li>
             <li>

@@ -1,5 +1,4 @@
 // src/components/About.tsx
-"use client";
 
 import React from "react";
 import Image from "next/image";
@@ -9,64 +8,35 @@ const Clients: React.FC = () => {
     <section id="clients" className="clients section">
       <div className="container" data-aos="fade-up">
         <div className="row gy-4">
-          <div className="col-xl-2 col-md-3 col-6 client-logo">
-            <Image
-              src="/assets/img/clients/client-1.png"
-              className="img-fluid"
-              alt="Client 1"
-              width={500}
-              height={500}
-            />
-          </div>
-          <div className="col-xl-2 col-md-3 col-6 client-logo">
-            <Image
-              src="/assets/img/clients/client-2.png"
-              className="img-fluid"
-              alt="Client 2"
-              width={500}
-              height={500}
-            />
-          </div>
-          <div className="col-xl-2 col-md-3 col-6 client-logo">
-            <Image
-              src="/assets/img/clients/client-3.png"
-              className="img-fluid"
-              alt="Client 3"
-              width={500}
-              height={500}
-            />
-          </div>
-          <div className="col-xl-2 col-md-3 col-6 client-logo">
-            <Image
-              src="/assets/img/clients/client-4.png"
-              className="img-fluid"
-              alt="Client 4"
-              width={500}
-              height={500}
-            />
-          </div>
-          <div className="col-xl-2 col-md-3 col-6 client-logo">
-            <Image
-              src="/assets/img/clients/client-5.png"
-              className="img-fluid"
-              alt="Client 5"
-              width={500}
-              height={500}
-            />
-          </div>
-          <div className="col-xl-2 col-md-3 col-6 client-logo">
-            <Image
-              src="/assets/img/clients/client-6.png"
-              className="img-fluid"
-              alt="Client 6"
-              width={500}
-              height={500}
-            />
-          </div>
+          {clientLogos.map((client, index) => (
+            <div
+              key={index}
+              className="col-xl-2 col-md-3 col-6 client-logo"
+              data-aos="zoom-in"
+              data-aos-delay={`${100 * index}`}
+            >
+              <Image
+                src={`/assets/img/clients/client-${index + 1}.png`}
+                alt={`Client ${index + 1}`}
+                width={500}
+                height={500}
+                layout="responsive"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 };
+
+const clientLogos = [
+  { id: 1, name: "Client 1" },
+  { id: 2, name: "Client 2" },
+  { id: 3, name: "Client 3" },
+  { id: 4, name: "Client 4" },
+  { id: 5, name: "Client 5" },
+  { id: 6, name: "Client 6" },
+];
 
 export default Clients;

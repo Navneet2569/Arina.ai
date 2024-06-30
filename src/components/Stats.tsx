@@ -1,12 +1,70 @@
-// src/components/StatsSection.tsx
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import CountUp from "react-countup";
+import StatItem from "./StatItem";
+
+const statsData = [
+  {
+    icon: "bi-emoji-smile",
+    end: 232,
+    title: "Happy Clients",
+    description: "consequuntur quae",
+  },
+  {
+    icon: "bi-journal-richtext",
+    end: 521,
+    title: "Projects",
+    description: "adipisci atque cum quia aut",
+  },
+  {
+    icon: "bi-headset",
+    end: 1453,
+    title: "Hours Of Support",
+    description: "aut commodi quaerat",
+  },
+  {
+    icon: "bi-people",
+    end: 32,
+    title: "Hard Workers",
+    description: "rerum asperiores dolor",
+  },
+];
 
 const Stats: React.FC = () => {
+  const [startCounting, setStartCounting] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setStartCounting(true);
+          }
+        });
+      },
+      { threshold: 0.5 } // Adjust threshold as needed
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    // Clean up observer
+    return () => {
+      if (statsRef.current) {
+        observer.unobserve(statsRef.current);
+      }
+    };
+  }, []);
+
   return (
     <section id="stats" className="stats section">
-      <div className="container" data-aos="fade-up" data-aos-delay="100">
+      <div
+        ref={statsRef}
+        className="container"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
         <div className="row gy-4 align-items-center">
           <div className="col-lg-5">
             <Image
@@ -19,57 +77,15 @@ const Stats: React.FC = () => {
           </div>
           <div className="col-lg-7">
             <div className="row gy-4">
-              <div className="col-lg-6">
-                <div className="stats-item d-flex">
-                  <i className="bi bi-emoji-smile flex-shrink-0"></i>
-                  <div>
-                    <CountUp end={232} duration={1} className="purecounter" />
-                    <p>
-                      <strong>Happy Clients</strong>{" "}
-                      <span>consequuntur quae</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-6">
-                <div className="stats-item d-flex">
-                  <i className="bi bi-journal-richtext flex-shrink-0"></i>
-                  <div>
-                    <CountUp end={521} duration={1} className="purecounter" />
-                    <p>
-                      <strong>Projects</strong>{" "}
-                      <span>adipisci atque cum quia aut</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-6">
-                <div className="stats-item d-flex">
-                  <i className="bi bi-headset flex-shrink-0"></i>
-                  <div>
-                    <CountUp end={1453} duration={1} className="purecounter" />
-                    <p>
-                      <strong>Hours Of Support</strong>{" "}
-                      <span>aut commodi quaerat</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-lg-6">
-                <div className="stats-item d-flex">
-                  <i className="bi bi-people flex-shrink-0"></i>
-                  <div>
-                    <CountUp end={32} duration={1} className="purecounter" />
-                    <p>
-                      <strong>Hard Workers</strong>{" "}
-                      <span>rerum asperiores dolor</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {statsData.map((stat, index) => (
+                <StatItem
+                  key={index}
+                  icon={stat.icon}
+                  end={startCounting ? stat.end : 0}
+                  title={stat.title}
+                  description={stat.description}
+                />
+              ))}
             </div>
           </div>
         </div>
