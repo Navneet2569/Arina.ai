@@ -1,5 +1,6 @@
 import React from "react";
 import PricingItem from "./PricingItem";
+import LazyLoad from "react-lazyload";
 
 const pricingPlans = [
   {
@@ -46,28 +47,30 @@ const pricingPlans = [
 const Pricing: React.FC = () => {
   return (
     <section id="pricing" className="pricing section">
-      <div className="container section-title" data-aos="fade-up">
-        <h2>Pricing</h2>
-        <p>
-          Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-          consectetur velit
-        </p>
-      </div>
-
-      <div className="container">
-        <div className="row gy-4">
-          {pricingPlans.map((plan, index) => (
-            <PricingItem
-              key={index}
-              title={plan.title}
-              price={plan.price}
-              features={plan.features}
-              isFeatured={plan.isFeatured}
-              delay={plan.delay}
-            />
-          ))}
+      <LazyLoad height={200} offset={800}>
+        <div className="container section-title" data-aos="fade-up">
+          <h2>Pricing</h2>
+          <p>
+            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
+            consectetur velit
+          </p>
         </div>
-      </div>
+
+        <div className="container">
+          <div className="row gy-4">
+            {pricingPlans.map((plan, index) => (
+              <PricingItem
+                key={index}
+                title={plan.title}
+                price={plan.price}
+                features={plan.features}
+                isFeatured={plan.isFeatured}
+                delay={plan.delay}
+              />
+            ))}
+          </div>
+        </div>
+      </LazyLoad>
     </section>
   );
 };

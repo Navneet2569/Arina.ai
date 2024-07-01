@@ -1,4 +1,5 @@
 import React from "react";
+import LazyLoad from "react-lazyload";
 
 interface FeatureItemProps {
   iconClass: string;
@@ -49,26 +50,28 @@ const FeaturesSection: React.FC = () => {
 
   return (
     <section id="features" className="features section">
-      <div className="container section-title" data-aos="fade-up">
-        <h2>Features</h2>
-        <p>
-          Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-          consectetur velit
-        </p>
-      </div>
-
-      <div className="container">
-        <div className="row gy-4">
-          {featureItems.map((item, index) => (
-            <FeatureItem
-              key={index}
-              iconClass={item.iconClass}
-              color={item.color}
-              title={item.title}
-            />
-          ))}
+      <LazyLoad height={200} offset={800}>
+        <div className="container section-title" data-aos="fade-up">
+          <h2>Features</h2>
+          <p>
+            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
+            consectetur velit
+          </p>
         </div>
-      </div>
+
+        <div className="container">
+          <div className="row gy-4">
+            {featureItems.map((item, index) => (
+              <FeatureItem
+                key={index}
+                iconClass={item.iconClass}
+                color={item.color}
+                title={item.title}
+              />
+            ))}
+          </div>
+        </div>
+      </LazyLoad>
     </section>
   );
 };

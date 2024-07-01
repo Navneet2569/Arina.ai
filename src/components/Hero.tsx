@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import LazyLoad from "react-lazyload";
 
 const Hero: React.FC = () => {
   return (

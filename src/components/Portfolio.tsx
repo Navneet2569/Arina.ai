@@ -1,5 +1,8 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import PortfolioItem from "./PortfolioItem";
+import LazyLoad from "react-lazyload";
 
 const portfolioItems = [
   {
@@ -101,56 +104,92 @@ const portfolioItems = [
 ];
 
 const Portfolio: React.FC = () => {
+  const [filter, setFilter] = useState("all");
+
+  const handleFilterClick = (category: string) => {
+    setFilter(category);
+  };
+
+  const filteredItems =
+    filter === "all"
+      ? portfolioItems
+      : portfolioItems.filter((item) => item.category === filter);
+
   return (
     <section id="portfolio" className="portfolio section">
-      <div className="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
-        <p>
-          Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-          consectetur velit
-        </p>
-      </div>
+      <LazyLoad height={200} offset={800}>
+        <div className="container section-title" data-aos="fade-up">
+          <h2>Portfolio</h2>
+          <p>
+            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
+            consectetur velit
+          </p>
+        </div>
 
-      <div className="container">
-        <div
-          className="isotope-layout"
-          data-default-filter="*"
-          data-layout="masonry"
-          data-sort="original-order"
-        >
-          <ul
-            className="portfolio-filters isotope-filters"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            <li data-filter="*" className="filter-active">
-              All
-            </li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Product</li>
-            <li data-filter=".filter-branding">Branding</li>
-            <li data-filter=".filter-books">Books</li>
-          </ul>
-
+        <div className="container">
           <div
-            className="row gy-4 isotope-container"
-            data-aos="fade-up"
-            data-aos-delay="200"
+            className="isotope-layout"
+            data-default-filter="*"
+            data-layout="masonry"
+            data-sort="original-order"
           >
-            {portfolioItems.map((item, index) => (
-              <PortfolioItem
-                key={index}
-                category={item.category}
-                title={item.title}
-                description={item.description}
-                image={item.image}
-                detailsLink={item.detailsLink}
-                gallery={item.gallery}
-              />
-            ))}
+            <ul
+              className="portfolio-filters isotope-filters"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <li
+                onClick={() => handleFilterClick("all")}
+                className={filter === "all" ? "filter-active" : ""}
+              >
+                All
+              </li>
+              <li
+                onClick={() => handleFilterClick("app")}
+                className={filter === "app" ? "filter-active" : ""}
+              >
+                App
+              </li>
+              <li
+                onClick={() => handleFilterClick("product")}
+                className={filter === "product" ? "filter-active" : ""}
+              >
+                Product
+              </li>
+              <li
+                onClick={() => handleFilterClick("branding")}
+                className={filter === "branding" ? "filter-active" : ""}
+              >
+                Branding
+              </li>
+              <li
+                onClick={() => handleFilterClick("books")}
+                className={filter === "books" ? "filter-active" : ""}
+              >
+                Books
+              </li>
+            </ul>
+
+            <div
+              className="row gy-4 isotope-container"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              {filteredItems.map((item, index) => (
+                <PortfolioItem
+                  key={index}
+                  category={item.category}
+                  title={item.title}
+                  description={item.description}
+                  image={item.image}
+                  detailsLink={item.detailsLink}
+                  gallery={item.gallery}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </LazyLoad>
     </section>
   );
 };

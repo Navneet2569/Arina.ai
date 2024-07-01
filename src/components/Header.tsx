@@ -22,20 +22,22 @@ const Header: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link href="#about" legacyBehavior>
+              <Link href="/#about" legacyBehavior prefetch={false}>
                 <a>About</a>
               </Link>
             </li>
             <li>
-              <Link href="#services" legacyBehavior>
+              <Link href="/#services" legacyBehavior>
                 <a>Services</a>
               </Link>
             </li>
             <li>
-              <a href="#portfolio">Portfolio</a>
+              <Link href="/#portfolio" legacyBehavior>
+                <a>Portfolio</a>
+              </Link>
             </li>
             <li>
-              <Link href="#team" legacyBehavior>
+              <Link href="/#team" legacyBehavior>
                 <a>Team</a>
               </Link>
             </li>
@@ -90,7 +92,7 @@ const Header: React.FC = () => {
           </ul>
           <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
-        <Link href="/" legacyBehavior>
+        <Link href="/" legacyBehavior prefetch={false}>
           <a className="btn-getstarted">Get Started</a>
         </Link>
       </div>

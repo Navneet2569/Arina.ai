@@ -1,5 +1,6 @@
 import React from "react";
 import ServiceItem from "./ServiceItem";
+import LazyLoad from "react-lazyload";
 
 const services = [
   {
@@ -35,27 +36,29 @@ const services = [
 const Services: React.FC = () => {
   return (
     <section id="services" className="services section">
-      <div className="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>
-          Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-          consectetur velit
-        </p>
-      </div>
-
-      <div className="container">
-        <div className="row gy-4">
-          {services.map((service, index) => (
-            <ServiceItem
-              key={index}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-              delay={service.delay}
-            />
-          ))}
+      <LazyLoad height={200} offset={800}>
+        <div className="container section-title" data-aos="fade-up">
+          <h2>Services</h2>
+          <p>
+            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
+            consectetur velit
+          </p>
         </div>
-      </div>
+
+        <div className="container">
+          <div className="row gy-4">
+            {services.map((service, index) => (
+              <ServiceItem
+                key={index}
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+                delay={service.delay}
+              />
+            ))}
+          </div>
+        </div>
+      </LazyLoad>
     </section>
   );
 };

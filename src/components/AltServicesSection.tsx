@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import LazyLoad from "react-lazyload";
 
 const services = [
   {
@@ -36,35 +37,37 @@ const services = [
 const AltServicesSection: React.FC = () => {
   return (
     <section id="alt-services" className="alt-services section">
-      <div className="container" data-aos="fade-up" data-aos-delay="100">
-        <div className="row gy-4">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="col-lg-6"
-              data-aos="zoom-in"
-              data-aos-delay={`${200 + index * 100}`}
-            >
-              <div className="service-item position-relative">
-                <div className="img">
-                  <Image
-                    src={service.imageUrl}
-                    alt={service.alt}
-                    width={600}
-                    height={400}
-                  />
-                </div>
-                <div className="details">
-                  <Link href="/service-details">
-                    <h3 className="stretched-link">{service.title}</h3>
-                  </Link>
-                  <p>{service.description}</p>
+      <LazyLoad height={200} offset={800}>
+        <div className="container" data-aos="fade-up" data-aos-delay="100">
+          <div className="row gy-4">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="col-lg-6"
+                data-aos="zoom-in"
+                data-aos-delay={`${200 + index * 100}`}
+              >
+                <div className="service-item position-relative">
+                  <div className="img">
+                    <Image
+                      src={service.imageUrl}
+                      alt={service.alt}
+                      width={600}
+                      height={400}
+                    />
+                  </div>
+                  <div className="details">
+                    <Link href="/service-details">
+                      <h3 className="stretched-link">{service.title}</h3>
+                    </Link>
+                    <p>{service.description}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </LazyLoad>
     </section>
   );
 };

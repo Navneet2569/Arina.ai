@@ -1,4 +1,5 @@
 import React from "react";
+import LazyLoad from "react-lazyload";
 
 interface FAQItemProps {
   question: string;
@@ -57,24 +58,26 @@ const FAQ: React.FC = () => {
 
   return (
     <section id="faq" className="faq section">
-      <div className="container section-title" data-aos="fade-up">
-        <h2>Frequently Asked Questions</h2>
-        <p>
-          Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-          consectetur velit
-        </p>
-      </div>
+      <LazyLoad height={200} offset={800}>
+        <div className="container section-title" data-aos="fade-up">
+          <h2>Frequently Asked Questions</h2>
+          <p>
+            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
+            consectetur velit
+          </p>
+        </div>
 
-      <div className="container">
-        {faqData.map((item, index) => (
-          <FAQItem
-            key={index}
-            question={item.question}
-            answer={item.answer}
-            delay={item.delay}
-          />
-        ))}
-      </div>
+        <div className="container">
+          {faqData.map((item, index) => (
+            <FAQItem
+              key={index}
+              question={item.question}
+              answer={item.answer}
+              delay={item.delay}
+            />
+          ))}
+        </div>
+      </LazyLoad>
     </section>
   );
 };

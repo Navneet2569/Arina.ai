@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import StatItem from "./StatItem";
 
@@ -30,40 +30,9 @@ const statsData = [
 ];
 
 const Stats: React.FC = () => {
-  const [startCounting, setStartCounting] = useState(false);
-  const statsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setStartCounting(true);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
-    }
-
-    return () => {
-      if (statsRef.current) {
-        observer.unobserve(statsRef.current);
-      }
-    };
-  }, []);
-
   return (
     <section id="stats" className="stats section">
-      <div
-        ref={statsRef}
-        className="container"
-        data-aos="fade-up"
-        data-aos-delay="100"
-      >
+      <div className="container" data-aos="fade-up" data-aos-delay="100">
         <div className="row gy-4 align-items-center">
           <div className="col-lg-5">
             <Image
@@ -80,9 +49,10 @@ const Stats: React.FC = () => {
                 <StatItem
                   key={index}
                   icon={stat.icon}
-                  end={startCounting ? stat.end : 0}
+                  end={stat.end}
                   title={stat.title}
                   description={stat.description}
+                  duration={stat.end > 700 ? 100 : 300} // Pass the duration prop
                 />
               ))}
             </div>

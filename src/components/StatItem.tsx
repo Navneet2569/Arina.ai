@@ -5,6 +5,7 @@ interface StatItemProps {
   end: number;
   title: string;
   description: string;
+  duration: number; // Add duration prop to ensure consistent timing
 }
 
 const StatItem: React.FC<StatItemProps> = ({
@@ -12,6 +13,7 @@ const StatItem: React.FC<StatItemProps> = ({
   end,
   title,
   description,
+  duration,
 }) => {
   const [count, setCount] = useState(0);
   const [countingStarted, setCountingStarted] = useState(false);
@@ -43,21 +45,19 @@ const StatItem: React.FC<StatItemProps> = ({
   useEffect(() => {
     if (countingStarted) {
       let start = 0;
-      const endValue = end;
-      const duration = 300;
-      const stepTime = Math.abs(Math.floor(duration / endValue));
+      const stepTime = duration / end; // Calculate step time based on duration and end value
 
       const timer = setInterval(() => {
         start += 1;
-        setCount(start);
-        if (start >= endValue) {
+        setCount((prev) => (prev + 1 > end ? end : prev + 1));
+        if (start >= end) {
           clearInterval(timer);
         }
       }, stepTime);
 
       return () => clearInterval(timer);
     }
-  }, [countingStarted, end]);
+  }, [countingStarted, end, duration]);
 
   return (
     <div ref={statsRef} className="col-lg-6">

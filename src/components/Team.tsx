@@ -1,5 +1,7 @@
 import React from "react";
 import Image from "next/image";
+import { Lazy } from "swiper/modules";
+import LazyLoad from "react-lazyload";
 
 const Team: React.FC = () => {
   const teamMembers = [
@@ -27,25 +29,27 @@ const Team: React.FC = () => {
 
   return (
     <section id="team" className="team section">
-      <div className="container section-title" data-aos="fade-up">
-        <h2>Team</h2>
-        <p>
-          Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
-          consectetur velit
-        </p>
-      </div>
-      <div className="container">
-        <div className="row gy-4">
-          {teamMembers.map((member, index) => (
-            <TeamMember
-              key={index}
-              name={member.name}
-              role={member.role}
-              imgSrc={member.imgSrc}
-            />
-          ))}
+      <LazyLoad height={200} offset={800}>
+        <div className="container section-title" data-aos="fade-up">
+          <h2>Team</h2>
+          <p>
+            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
+            consectetur velit
+          </p>
         </div>
-      </div>
+        <div className="container">
+          <div className="row gy-4">
+            {teamMembers.map((member, index) => (
+              <TeamMember
+                key={index}
+                name={member.name}
+                role={member.role}
+                imgSrc={member.imgSrc}
+              />
+            ))}
+          </div>
+        </div>
+      </LazyLoad>
     </section>
   );
 };

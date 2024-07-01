@@ -19,48 +19,33 @@ import Footer from "../components/Footer";
 const HomePage: React.FC = () => {
   return (
     <Layout>
-      <LazyLoad height={200} offset={100}>
-        <Hero />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <Clients />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <About />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <Stats />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <Services />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <AltServicesSection />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <Features />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <Testimonials />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <Portfolio />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <Team />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <Pricing />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <FAQ />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <Contact />
-      </LazyLoad>
-      <LazyLoad height={200} offset={100}>
-        <Footer />
-      </LazyLoad>
+      <Hero />
+
+      <Clients />
+
+      <About />
+
+      <Stats />
+
+      <Services />
+
+      <AltServicesSection />
+
+      <Features />
+
+      <Testimonials />
+
+      <Portfolio />
+
+      <Team />
+
+      <Pricing />
+
+      <FAQ />
+
+      <Contact />
+
+      <Footer />
     </Layout>
   );
 };
