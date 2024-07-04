@@ -8,7 +8,6 @@ import Script from "next/script";
 const ServiceDetails: React.FC = () => {
   return (
     <>
-      <Script src="/main.js" />
       <Header />
       <main className="main">
         <div className="page-title" data-aos="fade">
