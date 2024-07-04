@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import Header from "./components/Header";
+import Header from "./_components/Header";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (

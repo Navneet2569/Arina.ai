@@ -34,14 +34,14 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
         <div className="portfolio-info">
           <h4>{title}</h4>
           <p>{description}</p>
-          <a
+          <Link
             href={image}
             title={title}
             data-gallery={gallery}
             className="glightbox preview-link"
           >
             <i className="bi bi-zoom-in"></i>
-          </a>
+          </Link>
           <Link href={detailsLink} legacyBehavior>
             <a title="More Details" className="details-link">
               <i className="bi bi-link-45deg"></i>

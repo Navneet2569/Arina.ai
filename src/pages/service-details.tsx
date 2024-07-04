@@ -1,12 +1,14 @@
 import React from "react";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import Footer from "@/_components/Footer";
+import Header from "@/_components/Header";
 import Image from "next/image";
-import Link from "next/link"; // Import Link from next/link
+import Link from "next/link";
+import Script from "next/script";
 
 const ServiceDetails: React.FC = () => {
   return (
     <>
+      <Script src="/main.js" />
       <Header />
       <main className="main">
         <div className="page-title" data-aos="fade">
@@ -14,10 +16,7 @@ const ServiceDetails: React.FC = () => {
             <nav className="breadcrumbs">
               <ol>
                 <li>
-                  <Link href="/">
-                    {" "}
-                    <a>Home</a>
-                  </Link>
+                  <Link href="/">Home</Link>
                 </li>
                 <li className="current">Service Details</li>
               </ol>
@@ -29,15 +28,15 @@ const ServiceDetails: React.FC = () => {
         <section id="service-details" className="service-details section">
           <div className="container">
             <div className="row gy-4">
-              <div className="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+              <div className="col-lg-4" data-aos="fade-up" data-aos-delay={100}>
                 <div className="services-list">
-                  <a href="#" className="active">
+                  <Link href="#" className="active">
                     Web Design
-                  </a>
-                  <a href="#">Software Development</a>
-                  <a href="#">Product Management</a>
-                  <a href="#">Graphic Design</a>
-                  <a href="#">Marketing</a>
+                  </Link>
+                  <Link href="#">Software Development</Link>
+                  <Link href="#">Product Management</Link>
+                  <Link href="#">Graphic Design</Link>
+                  <Link href="#">Marketing</Link>
                 </div>
                 <h4>Enim qui eos rerum in delectus</h4>
                 <p>
@@ -48,7 +47,7 @@ const ServiceDetails: React.FC = () => {
                 </p>
               </div>
 
-              <div className="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+              <div className="col-lg-8" data-aos="fade-up" data-aos-delay={200}>
                 <Image
                   src="/assets/img/services.jpg"
                   alt="Services Image"

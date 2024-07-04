@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import SwiperCore from "swiper";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import Footer from "@/_components/Footer";
+import Header from "@/_components/Header";
+import Script from "next/script";
 
 SwiperCore.use([Pagination, Autoplay]);
 
@@ -31,6 +32,8 @@ const PortfolioDetails: React.FC = () => {
 
   return (
     <>
+      <Script src="/main.js" />
+
       <Header />
 
       <div className="page-title" data-aos="fade">
@@ -38,9 +41,7 @@ const PortfolioDetails: React.FC = () => {
           <nav className="breadcrumbs">
             <ol>
               <li>
-                <Link href="/" legacyBehavior>
-                  <a>Home</a>
-                </Link>
+                <Link href="/">Home</Link>
               </li>
               <li className="current">Portfolio Details</li>
             </ol>
@@ -59,28 +60,24 @@ const PortfolioDetails: React.FC = () => {
           <div className="row gy-4">
             <div className="col-lg-8 portfolio-details-slider swiper init-swiper">
               <Swiper
-                className="swiper-container"
                 loop={true}
                 pagination={{ clickable: true }}
                 autoplay={{ delay: 5000 }}
                 slidesPerView={1}
                 spaceBetween={30}
               >
-                <div className="swiper-wrapper">
-                  {portfolioImages.map((image, index) => (
-                    <SwiperSlide key={index}>
-                      <div className="portfolio-image">
-                        <Image
-                          src={image.src}
-                          alt={image.alt}
-                          width={800}
-                          height={550}
-                        />
-                      </div>
-                      <div className="swiper-pagination"></div>
-                    </SwiperSlide>
-                  ))}
-                </div>
+                {portfolioImages.map((image, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="portfolio-image">
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        width={800}
+                        height={550}
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
               </Swiper>
             </div>
             <div className="col-lg-4">
@@ -102,8 +99,12 @@ const PortfolioDetails: React.FC = () => {
                   </li>
                   <li>
                     <strong>Project URL</strong>:{" "}
-                    <Link href="www.example.com" target="_blank" legacyBehavior>
-                      <a rel="noopener noreferrer">www.example.com</a>
+                    <Link
+                      href="http://www.example.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      www.example.com
                     </Link>
                   </li>
                 </ul>

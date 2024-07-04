@@ -2,6 +2,15 @@ import React from "react";
 import Image from "next/image";
 import LazyLoad from "react-lazyload";
 
+const clientLogos = [
+  { id: 1, imageUrl: "/assets/img/clients/client-1.png" },
+  { id: 2, imageUrl: "/assets/img/clients/client-2.png" },
+  { id: 3, imageUrl: "/assets/img/clients/client-3.png" },
+  { id: 4, imageUrl: "/assets/img/clients/client-4.png" },
+  { id: 5, imageUrl: "/assets/img/clients/client-5.png" },
+  { id: 6, imageUrl: "/assets/img/clients/client-6.png" },
+];
+
 const Clients: React.FC = () => {
   return (
     <section id="clients" className="clients section">
@@ -10,16 +19,16 @@ const Clients: React.FC = () => {
           <div className="row gy-4">
             {clientLogos.map((client, index) => (
               <div
-                key={index}
+                key={client.id}
                 className="col-xl-2 col-md-3 col-6 client-logo"
                 data-aos="zoom-in"
                 data-aos-delay={`${100 * index}`}
               >
                 <Image
-                  src={`/assets/img/clients/client-${index + 1}.png`}
-                  alt={`Client ${index + 1}`}
-                  width={500}
-                  height={500}
+                  src={client.imageUrl}
+                  alt={`Client ${client.id}`}
+                  width={0}
+                  height={0}
                   layout="responsive"
                 />
               </div>
@@ -30,14 +39,5 @@ const Clients: React.FC = () => {
     </section>
   );
 };
-
-const clientLogos = [
-  { id: 1, name: "Client 1" },
-  { id: 2, name: "Client 2" },
-  { id: 3, name: "Client 3" },
-  { id: 4, name: "Client 4" },
-  { id: 5, name: "Client 5" },
-  { id: 6, name: "Client 6" },
-];
 
 export default Clients;
