@@ -37,43 +37,6 @@
   window.addEventListener("load", toggleScrolled);
 
   /**
-   * Mobile nav toggle
-   */
-  const mobileNavToggleBtn = select(".mobile-nav-toggle");
-  if (mobileNavToggleBtn) {
-    mobileNavToggleBtn.addEventListener("click", () => {
-      select("body").classList.toggle("mobile-nav-active");
-      mobileNavToggleBtn.classList.toggle("bi-list");
-      mobileNavToggleBtn.classList.toggle("bi-x");
-    });
-  }
-
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  select("#navmenu a", true).forEach((navmenu) => {
-    navmenu.addEventListener("click", () => {
-      if (select(".mobile-nav-active")) {
-        select("body").classList.remove("mobile-nav-active");
-        mobileNavToggleBtn.classList.add("bi-list");
-        mobileNavToggleBtn.classList.remove("bi-x");
-      }
-    });
-  });
-
-  /**
-   * Toggle mobile nav dropdowns
-   */
-  select(".navmenu .toggle-dropdown", true).forEach((toggleDropdown) => {
-    toggleDropdown.addEventListener("click", function (e) {
-      e.preventDefault();
-      this.parentNode.classList.toggle("active");
-      this.parentNode.nextElementSibling.classList.toggle("dropdown-active");
-      e.stopImmediatePropagation();
-    });
-  });
-
-  /**
    * Preloader
    */
   const preloader = select("#preloader");

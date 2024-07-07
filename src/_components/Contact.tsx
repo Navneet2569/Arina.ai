@@ -22,6 +22,16 @@ const Contact: React.FC = () => {
     try {
       const docRef = await addDoc(collection(db, "contacts"), formData);
       console.log("Document written with ID: ", docRef.id);
+
+      // Call the cloud function to send the email
+      await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
       setFormStatus("success");
       setFormData({
         name: "",

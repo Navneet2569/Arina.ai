@@ -1,7 +1,15 @@
+"use client";
+
 import React, { useEffect } from "react";
 import Link from "next/link";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/firebaseConfig";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/router";
 
 const Header: React.FC = () => {
+  const router = useRouter();
+
   useEffect(() => {
     const select = (selector: string, all = false) =>
       all
@@ -49,6 +57,14 @@ const Header: React.FC = () => {
       });
     });
   }, []);
+
+  const [user] = useAuthState(auth);
+
+  const handleLogout = () => {
+    signOut(auth); // Sign out user from Firebase
+    sessionStorage.removeItem("user"); // Clear session from sessionStorage
+    router.push("/signin");
+  };
 
   return (
     <header id="header" className="header d-flex align-items-center sticky-top">
@@ -126,9 +142,15 @@ const Header: React.FC = () => {
           </ul>
           <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
-        <Link href="/" className="btn-getstarted">
-          Get Started
-        </Link>
+        {user ? (
+          <button onClick={handleLogout} className="btn-getstarted">
+            Logout
+          </button>
+        ) : (
+          <Link href="/signin">
+            <button className="btn-getstarted">Sign In</button>
+          </Link>
+        )}
       </div>
     </header>
   );
