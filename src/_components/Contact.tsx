@@ -20,8 +20,22 @@ const Contact: React.FC = () => {
     setFormStatus("loading");
 
     try {
-      const docRef = await addDoc(collection(db, "contacts"), formData);
-      console.log("Document written with ID: ", docRef.id);
+      // Add document to 'contacts' collection
+      const contactDocRef = await addDoc(collection(db, "contacts"), formData);
+      console.log("Contact document written with ID: ", contactDocRef.id);
+
+      // Create the newsletter data
+      const newsletterData = {
+        name: formData.name,
+        email: formData.email,
+      };
+
+      // Add document to 'newsletter' collection
+      const newsletterDocRef = await addDoc(
+        collection(db, "newsletter"),
+        newsletterData
+      );
+      console.log("Newsletter document written with ID: ", newsletterDocRef.id);
 
       // Call the cloud function to send the email
       await fetch("/api/sendEmail", {
@@ -29,7 +43,7 @@ const Contact: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(newsletterData),
       });
 
       setFormStatus("success");
