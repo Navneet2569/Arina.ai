@@ -35,12 +35,10 @@ const Stats: React.FC = () => {
       <div className="container" data-aos="fade-up" data-aos-delay="100">
         <div className="row gy-4 align-items-center">
           <div className="col-lg-5">
-            <Image
+            <img
               src="/assets/img/stats-img.svg"
               alt="Stats Image"
               className="img-fluid"
-              width={500}
-              height={500}
             />
           </div>
           <div className="col-lg-7">

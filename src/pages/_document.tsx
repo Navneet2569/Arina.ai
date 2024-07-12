@@ -40,7 +40,6 @@ class MyDocument extends Document {
             href="/assets/vendor/swiper/swiper-bundle.min.css"
           />
 
-          {/* Main Styles */}
           <link rel="stylesheet" href="/main.css" />
         </Head>
         <body>

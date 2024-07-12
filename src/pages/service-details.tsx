@@ -47,12 +47,10 @@ const ServiceDetails: React.FC = () => {
               </div>
 
               <div className="col-lg-8" data-aos="fade-up" data-aos-delay={200}>
-                <Image
+                <img
                   src="/assets/img/services.jpg"
                   alt="Services Image"
                   className="img-fluid services-img"
-                  width={800}
-                  height={600}
                 />
                 <h3>
                   Temporibus et in vero dicta aut eius lidero plastis trand

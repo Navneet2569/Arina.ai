@@ -49,12 +49,7 @@ const AltServicesSection: React.FC = () => {
               >
                 <div className="service-item position-relative">
                   <div className="img">
-                    <Image
-                      src={service.imageUrl}
-                      alt={service.alt}
-                      width={600}
-                      height={400}
-                    />
+                    <img src={service.imageUrl} alt={service.alt} />
                   </div>
                   <div className="details">
                     <Link href="/service-details">

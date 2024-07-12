@@ -74,12 +74,10 @@ const Testimonials: React.FC = () => {
               <SwiperSlide key={index}>
                 <div className="testimonial-wrap">
                   <div className="testimonial-item">
-                    <Image
+                    <img
                       src={testimonial.imgSrc}
                       className="testimonial-img"
                       alt=""
-                      width={100}
-                      height={100}
                     />
                     <h3>{testimonial.name}</h3>
                     <h4>{testimonial.role}</h4>

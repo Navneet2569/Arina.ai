@@ -71,13 +71,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({ name, role, imgSrc }) => {
     >
       <div className="team-member">
         <div className="member-img">
-          <Image
-            src={imgSrc}
-            alt={`Team Member ${name}`}
-            width={400}
-            height={400}
-            className="img-fluid"
-          />
+          <img src={imgSrc} alt={`Team Member ${name}`} className="img-fluid" />
           <div className="social">
             <a href="#">
               <i className="bi bi-twitter-x"></i>

@@ -1,7 +1,7 @@
-// "use client";
+"use client";
 
 import React, { useEffect } from "react";
-import { useRouter } from "next/router"; // Changed to 'next/router'
+import { useRouter } from "next/router";
 import Layout from "../layout";
 import Hero from "../_components/Hero";
 import About from "../_components/About";

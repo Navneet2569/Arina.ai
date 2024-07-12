@@ -20,31 +20,22 @@ const Contact: React.FC = () => {
     setFormStatus("loading");
 
     try {
-      // Add document to 'contacts' collection
       const contactDocRef = await addDoc(collection(db, "contacts"), formData);
       console.log("Contact document written with ID: ", contactDocRef.id);
 
-      // Create the newsletter data
-      const newsletterData = {
-        name: formData.name,
-        email: formData.email,
-      };
-
-      // Add document to 'newsletter' collection
-      const newsletterDocRef = await addDoc(
-        collection(db, "newsletter"),
-        newsletterData
-      );
-      console.log("Newsletter document written with ID: ", newsletterDocRef.id);
-
-      // Call the cloud function to send the email
-      await fetch("/api/sendEmail", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newsletterData),
+        body: JSON.stringify(formData),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error sending email:", errorData.error);
+        throw new Error(errorData.error);
+      }
 
       setFormStatus("success");
       setFormData({

@@ -69,12 +69,7 @@ const PortfolioDetails: React.FC = () => {
                 {portfolioImages.map((image, index) => (
                   <SwiperSlide key={index}>
                     <div className="portfolio-image">
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={800}
-                        height={550}
-                      />
+                      <img src={image.src} alt={image.alt} />
                     </div>
                   </SwiperSlide>
                 ))}

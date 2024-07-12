@@ -24,13 +24,7 @@ const Clients: React.FC = () => {
                 data-aos="zoom-in"
                 data-aos-delay={`${100 * index}`}
               >
-                <Image
-                  src={client.imageUrl}
-                  alt={`Client ${client.id}`}
-                  width={0}
-                  height={0}
-                  layout="responsive"
-                />
+                <img src={client.imageUrl} alt={`Client ${client.id}`} />
               </div>
             ))}
           </div>

@@ -24,13 +24,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({
       className={`col-lg-4 col-md-6 portfolio-item isotope-item filter-${category}`}
     >
       <div className="portfolio-content h-100">
-        <Image
-          src={image}
-          alt={title}
-          width={400}
-          height={400}
-          className="img-fluid"
-        />
+        <img src={image} alt={title} className="img-fluid" />
         <div className="portfolio-info">
           <h4>{title}</h4>
           <p>{description}</p>
