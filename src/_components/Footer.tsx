@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Toast, ToastContainer } from "react-bootstrap";
+import { db } from "@/firebaseConfig"; // Make sure this path is correct
+import { collection, addDoc } from "firebase/firestore";
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -17,6 +19,8 @@ const Footer: React.FC = () => {
     setFormStatus("loading");
 
     try {
+      await addDoc(collection(db, "newsletter"), { email });
+
       const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: {

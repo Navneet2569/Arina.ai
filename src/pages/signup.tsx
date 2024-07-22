@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth } from "@/firebaseConfig";
-import { useRouter } from "next/router"; // Import the router from Next.js
-import Link from "next/link"; // Import Link from Next.js
+import { useRouter } from "next/router";
+import Link from "next/link";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "@/firebaseConfig";
 
 const Signup: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -22,12 +22,19 @@ const Signup: React.FC = () => {
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent form from reloading the page
+    event.preventDefault();
     try {
       const auth = getAuth();
       const res = await createUserWithEmailAndPassword(auth, email, password);
       console.log("Signup response:", res);
-      sessionStorage.setItem("user", "true"); // Store string value in sessionStorage
+
+      // Create a document in Firestore with email and role
+      await setDoc(doc(db, "users", res.user.uid), {
+        email: email,
+        role: "user",
+      });
+
+      sessionStorage.setItem("user", "true");
       setEmail("");
       setPassword("");
       router.push("/");
@@ -87,6 +94,15 @@ const Signup: React.FC = () => {
               style={{ color: "#0070f3", textDecoration: "underline" }}
             >
               Sign In here
+            </Link>
+          </p>
+          <p style={{ marginTop: "0.3rem", textAlign: "center" }}>
+            Admin?{" "}
+            <Link
+              href="/adminlogin"
+              style={{ color: "#0070f3", textDecoration: "underline" }}
+            >
+              Login as Admin
             </Link>
           </p>
         </form>

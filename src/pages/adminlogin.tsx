@@ -1,25 +1,20 @@
-"use client";
+// "use client";
 
-import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import { useRouter } from "next/router"; // Changed to 'next/router'
+import React, { useState, ChangeEvent, FormEvent } from "react";
+import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/firebaseConfig";
+import { auth, db } from "@/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import Link from "next/link"; // Import Link from Next.js
+import { doc, getDoc } from "firebase/firestore";
+import Link from "next/link";
 
-const Signin: React.FC = () => {
+const AdminLogin: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
-
-  useEffect(() => {
-    if (user) {
-      router.push("/"); // Redirect to homepage if user is already signed in
-    }
-  }, [user, router]);
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -33,14 +28,28 @@ const Signin: React.FC = () => {
     event.preventDefault();
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      sessionStorage.setItem("user", "true");
-      setEmail("");
-      setPassword("");
-      setError(null);
-      router.push("/");
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists() && userDoc.data()?.role === "admin") {
+        sessionStorage.setItem("admin", "true");
+        setEmail("");
+        setPassword("");
+        setError(null);
+        router.push("/admin-dashboard");
+      } else {
+        setError("Invalid Admin Login");
+        await auth.signOut();
+      }
     } catch (error) {
-      setError(error.message);
+      setError("Invalid Email Id/Password");
     }
   };
 
@@ -51,7 +60,7 @@ const Signin: React.FC = () => {
   return (
     <div style={wrapperStyle}>
       <div style={containerStyle}>
-        <h1 style={headingStyle}>Sign In</h1>
+        <h1 style={headingStyle}>Admin Login</h1>
         <form style={formStyle} onSubmit={handleSubmit}>
           <div style={formGroupStyle}>
             <label htmlFor="email" style={labelStyle}>
@@ -81,26 +90,17 @@ const Signin: React.FC = () => {
               onChange={handlePasswordChange}
             />
           </div>
-          {error && <p style={{ color: "red" }}>Invalid Email Id/Password</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
           <button type="submit" style={submitButtonStyle}>
-            Sign In
+            Admin Login
           </button>
           <p style={{ marginTop: "1rem", textAlign: "center" }}>
-            Do not have an account?{" "}
+            Not an admin?{" "}
             <Link
-              href="/signup"
+              href="/signin"
               style={{ color: "#0070f3", textDecoration: "underline" }}
             >
-              Sign Up here
-            </Link>
-          </p>
-          <p style={{ marginTop: "0.3rem", textAlign: "center" }}>
-            Admin?{" "}
-            <Link
-              href="/adminlogin"
-              style={{ color: "#0070f3", textDecoration: "underline" }}
-            >
-              Login as Admin
+              Sign in here
             </Link>
           </p>
         </form>
@@ -165,4 +165,4 @@ const submitButtonStyle: React.CSSProperties = {
   fontSize: "16px",
 };
 
-export default Signin;
+export default AdminLogin;
