@@ -1,6 +1,6 @@
 // pages/api/data.ts
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getData } from "../services/firestoreService";
+import { getData } from "../../_services/firestoreService";
 
 export default async function handler(
   req: NextApiRequest,
