@@ -44,7 +44,7 @@ const AdminLogin: React.FC = () => {
         setEmail("");
         setPassword("");
         setError(null);
-        router.push("/admin-dashboard");
+        router.push("/admindashboard");
       } else {
         setError("Invalid Admin Login");
         await auth.signOut();
