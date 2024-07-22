@@ -30,7 +30,7 @@ const DataPage = ({ data }: HomeProps) => {
         const userDocRef = doc(db, "users", user.uid);
         const userDoc = await getDoc(userDocRef);
 
-        if (!userDoc.exists() || userDoc.data().role !== "admin") {
+        if (!userDoc.exists() || userDoc.data()?.role !== "admin") {
           router.push("/adminlogin");
         }
       } else {
@@ -100,12 +100,19 @@ const DataPage = ({ data }: HomeProps) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await axios.get("http://localhost:3000/api/data");
-  const data: Data[] = res.data;
+  try {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_SITE_URL}/api/data`);
+    const data: Data[] = res.data;
 
-  return {
-    props: { data },
-  };
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: { data: [] },
+    };
+  }
 };
 
 export default DataPage;
