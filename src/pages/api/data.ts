@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getData } from "../../_services/firestoreService";
+import { getData } from "../../utils/firestoreService";
 
 export default async function handler(
   req: NextApiRequest,

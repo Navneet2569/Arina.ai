@@ -1,12 +1,20 @@
 import { GetServerSideProps } from "next";
 import axios from "axios";
-import { useEffect } from "react";
-import { Container, Row, Col, ListGroup, Button } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Button,
+  Spinner,
+  Alert,
+} from "react-bootstrap";
 import { useRouter } from "next/router";
-import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "@/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
+import AdminHeader from "@/_components/AdminHeader";
 
 type Data = {
   id: string;
@@ -20,9 +28,11 @@ type HomeProps = {
   data: Data[];
 };
 
-const DataPage = ({ data }: HomeProps) => {
+const DataPage = ({ data: initialData }: HomeProps) => {
   const router = useRouter();
   const [user, loading] = useAuthState(auth);
+  const [data, setData] = useState<Data[]>(initialData);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   useEffect(() => {
     const checkUserRole = async () => {
@@ -45,57 +55,110 @@ const DataPage = ({ data }: HomeProps) => {
     checkUserRole();
   }, [user, loading, router]);
 
-  const handleLogout = async () => {
+  const handleDelete = async (id: string) => {
+    setDeleting(id);
     try {
-      await signOut(auth);
-      sessionStorage.removeItem("admin");
-      router.push("/adminlogin");
+      await axios.delete("/api/deleteEnquiry", { data: { id } });
+      setData((prevData) => prevData.filter((item) => item.id !== id));
     } catch (error) {
-      console.error("Error signing out:", error);
+      console.error("Error deleting enquiry:", error);
+    } finally {
+      setDeleting(null);
     }
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <AdminHeader />
+        <Container className="mt-5">
+          <Row className="mb-4">
+            <Col>
+              <h1>Contact Admin</h1>
+            </Col>
+          </Row>
+          <div className="d-flex justify-content-center align-items-center vh-100">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        </Container>
+      </>
+    );
   }
 
   if (!user) {
-    return null;
+    return (
+      <>
+        <AdminHeader />
+        <Container className="mt-5">
+          <Row className="mb-4">
+            <Col>
+              <h1>Contact Admin</h1>
+            </Col>
+          </Row>
+        </Container>
+      </>
+    );
   }
 
   return (
-    <Container className="mt-5">
-      <Row className="mb-4">
-        <Col>
-          <h1>Data from Firestore</h1>
-        </Col>
-        <Col className="text-right">
-          <Button variant="danger" onClick={handleLogout}>
-            Logout
-          </Button>
-        </Col>
-      </Row>
-      <ListGroup>
-        {data.map((item) => (
-          <ListGroup.Item key={item.id} className="mb-3 p-3">
-            <Row>
-              <Col md={3}>
-                <strong>Email:</strong> {item.email}
+    <>
+      <AdminHeader />
+      <Container className="mt-5">
+        <Row className="mb-4">
+          <Col>
+            <h1>Contact Admin</h1>
+          </Col>
+        </Row>
+        {data.length === 0 ? (
+          <Row className="justify-content-center">
+            <Col md={6}>
+              <Card className="text-center shadow-sm">
+                <Card.Body>
+                  <Card.Title>No Enquiries Found</Card.Title>
+                  <Card.Text>
+                    There are currently no enquiries to display. Check back
+                    later.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        ) : (
+          <Row>
+            {data.map((item) => (
+              <Col key={item.id} xs={12} sm={6} lg={4} className="mb-4">
+                <Card className="h-100 shadow-sm">
+                  <Card.Body className="d-flex flex-column">
+                    <Card.Title>
+                      <strong>{item.subject}</strong>
+                    </Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">
+                      {item.name}
+                    </Card.Subtitle>
+                    <Card.Text>
+                      <strong>Email:</strong> {item.email}
+                    </Card.Text>
+                    <Card.Text className="flex-grow-1">
+                      <strong>Message:</strong> {item.message}
+                    </Card.Text>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(item.id)}
+                      disabled={deleting === item.id}
+                      className="mt-auto"
+                    >
+                      {deleting === item.id ? "Deleting..." : "Delete"}
+                    </Button>
+                  </Card.Body>
+                </Card>
               </Col>
-              <Col md={2}>
-                <strong>Subject:</strong> {item.subject}
-              </Col>
-              <Col md={2}>
-                <strong>Name:</strong> {item.name}
-              </Col>
-              <Col md={5}>
-                <strong>Message:</strong> {item.message}
-              </Col>
-            </Row>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
-    </Container>
+            ))}
+          </Row>
+        )}
+      </Container>
+    </>
   );
 };
 

@@ -5,8 +5,11 @@ import Link from "next/link";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/firebaseConfig";
 import { signOut } from "firebase/auth";
+import { useRouter } from "next/router";
 
-const Header: React.FC = () => {
+const AdminHeader: React.FC = () => {
+  const router = useRouter();
+
   useEffect(() => {
     const select = (selector: string, all = false) =>
       all
@@ -60,80 +63,29 @@ const Header: React.FC = () => {
   const handleLogout = () => {
     signOut(auth);
     sessionStorage.removeItem("user");
+    router.push("/signin");
   };
 
   return (
     <header id="header" className="header d-flex align-items-center sticky-top">
       <div className="container-fluid container-xl position-relative d-flex align-items-center">
-        <Link href="/" className="logo d-flex align-items-center me-auto">
+        <div className="logo d-flex align-items-center me-auto">
           {/* <img src="assets/img/logo.png" alt="logo" /> */}
           <h1 className="sitename">Vesperr</h1>
-        </Link>
+        </div>
 
         <nav id="navmenu" className="navmenu">
           <ul>
             <li>
-              <Link href="/" className="active">
-                Home
+              <Link href="/admindashboard" className="active">
+                Enquries
               </Link>
             </li>
             <li>
-              <Link href="/#about">About</Link>
+              <Link href="/blogs">Blogs</Link>
             </li>
             <li>
-              <Link href="/#services">Services</Link>
-            </li>
-            <li>
-              <Link href="/#portfolio">Portfolio</Link>
-            </li>
-            <li>
-              <Link href="/#team">Team</Link>
-            </li>
-            <li className="dropdown">
-              <Link href="#">
-                Dropdown
-                <i className="bi bi-chevron-down toggle-dropdown"></i>
-              </Link>
-              <ul>
-                <li>
-                  <Link href="#">Dropdown 1</Link>
-                </li>
-                <li className="dropdown">
-                  <Link href="#">
-                    <span>Deep Dropdown</span>{" "}
-                    <i className="bi bi-chevron-down toggle-dropdown"></i>
-                  </Link>
-                  <ul>
-                    <li>
-                      <Link href="#">Deep Dropdown 1</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Deep Dropdown 2</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Deep Dropdown 3</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Deep Dropdown 4</Link>
-                    </li>
-                    <li>
-                      <Link href="#">Deep Dropdown 5</Link>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <Link href="#">Dropdown 2</Link>
-                </li>
-                <li>
-                  <Link href="#">Dropdown 3</Link>
-                </li>
-                <li>
-                  <Link href="#">Dropdown 4</Link>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <Link href="/#contact">Contact</Link>
+              <Link href="/create-blog">Create a blog</Link>
             </li>
           </ul>
           <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -143,7 +95,7 @@ const Header: React.FC = () => {
             Logout
           </button>
         ) : (
-          <Link href="/signin">
+          <Link href="/adminlogin">
             <button className="btn-getstarted">Sign In</button>
           </Link>
         )}
@@ -152,4 +104,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default AdminHeader;
