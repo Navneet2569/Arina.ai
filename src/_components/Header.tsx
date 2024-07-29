@@ -105,7 +105,7 @@ const Header: React.FC = () => {
                   </Link>
                   <ul>
                     <li>
-                      <Link href="#">Deep Dropdown 1</Link>
+                      <Link href="/blogs">Blogs</Link>
                     </li>
                     <li>
                       <Link href="#">Deep Dropdown 2</Link>

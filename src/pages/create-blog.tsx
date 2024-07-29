@@ -5,6 +5,7 @@ import { db, storage } from "@/firebaseConfig";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import AdminHeader from "@/_components/AdminHeader";
+import Footer from "@/_components/Footer";
 
 const CreateBlog: React.FC = () => {
   const [title, setTitle] = useState<string>("");
@@ -136,6 +137,7 @@ const CreateBlog: React.FC = () => {
           }
         `}</style>
       </Container>
+      <Footer />
     </>
   );
 };

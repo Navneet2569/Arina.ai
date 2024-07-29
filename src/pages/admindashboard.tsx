@@ -15,6 +15,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "@/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import AdminHeader from "@/_components/AdminHeader";
+import Footer from "@/_components/Footer";
 
 type Data = {
   id: string;
@@ -158,6 +159,7 @@ const DataPage = ({ data: initialData }: HomeProps) => {
           </Row>
         )}
       </Container>
+      <Footer />
     </>
   );
 };

@@ -1,6 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDoc, doc } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 import Layout from "../layout";
 import Hero from "../_components/Hero";
 import About from "../_components/About";
@@ -18,6 +22,33 @@ import Contact from "../_components/Contact";
 import Footer from "../_components/Footer";
 
 const HomePage: React.FC = () => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // User is signed in, check if they are an admin
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists() && userDoc.data().role === "admin") {
+          // User is an admin, redirect to admin dashboard
+          router.push("/admindashboard");
+        } else {
+          // User is not an admin, allow to stay on the homepage
+          setLoading(false);
+        }
+      } else {
+        // No user is signed in, allow to stay on the homepage
+        setLoading(false);
+      }
+    });
+  }, [router]);
+
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading indicator while checking the user's role
+  }
+
   return (
     <Layout>
       <Hero />
