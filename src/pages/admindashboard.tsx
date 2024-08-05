@@ -1,15 +1,7 @@
 import { GetServerSideProps } from "next";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Button,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Spinner } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "@/firebaseConfig";

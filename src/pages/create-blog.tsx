@@ -6,6 +6,8 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import AdminHeader from "@/_components/AdminHeader";
 import Footer from "@/_components/Footer";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const CreateBlog: React.FC = () => {
   const [title, setTitle] = useState<string>("");
@@ -20,6 +22,11 @@ const CreateBlog: React.FC = () => {
     }
   };
 
+  const handleContentChange = (event: any, editor: any) => {
+    const data = editor.getData();
+    setContent(data);
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -29,12 +36,10 @@ const CreateBlog: React.FC = () => {
     }
 
     try {
-      // Upload image to Firebase Storage
       const storageRef = ref(storage, `images/${image.name}`);
       await uploadBytes(storageRef, image);
       const imageUrl = await getDownloadURL(storageRef);
 
-      // Add blog post to Firestore
       const blogRef = collection(db, "blogs");
       await addDoc(blogRef, {
         title,
@@ -44,7 +49,6 @@ const CreateBlog: React.FC = () => {
         createdAt: serverTimestamp(),
       });
 
-      // After submitting, redirect the user or show a success message
       alert("Blog post created!");
       router.push("/");
     } catch (error) {
@@ -73,13 +77,10 @@ const CreateBlog: React.FC = () => {
               </Form.Group>
               <Form.Group controlId="formContent" className="mb-3">
                 <Form.Label>Content</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={6}
-                  placeholder="Enter content"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  required
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={content}
+                  onChange={handleContentChange}
                 />
               </Form.Group>
               <Form.Group controlId="formAuthor" className="mb-3">
@@ -112,28 +113,6 @@ const CreateBlog: React.FC = () => {
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          }
-
-          h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-          }
-
-          button {
-            width: 100%;
-            padding: 0.75rem;
-            font-size: 1.25rem;
-            border-radius: 5px;
-          }
-
-          @media (max-width: 576px) {
-            .blog-container {
-              padding: 1rem;
-            }
-
-            h1 {
-              font-size: 1.5rem;
-            }
           }
         `}</style>
       </Container>

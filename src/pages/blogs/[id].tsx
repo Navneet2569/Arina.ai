@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { doc, getDoc, deleteDoc } from "firebase/firestore";
+import { doc, getDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import Footer from "@/_components/Footer";
 import Header from "@/_components/Header";
 import AdminHeader from "@/_components/AdminHeader";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Spinner from "react-bootstrap/Spinner";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 interface Blog {
   title: string;
@@ -19,45 +21,44 @@ const BlogDetail: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
   const [blog, setBlog] = useState<Blog | null>(null);
-  const [isAdmin, setIsAdmin] = useState<boolean | null>(null); // Ensure admin status is correctly set
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Check admin status
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // Check if the user is an admin
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.exists() && userDoc.data().role === "admin") {
           setIsAdmin(true);
+        } else {
+          setIsAdmin(false);
         }
+      } else {
+        setIsAdmin(false);
       }
       setLoading(false);
     });
   }, []);
 
-  // Fetch blog data
   useEffect(() => {
     const fetchBlog = async () => {
       if (id) {
         try {
           const docRef = doc(db, "blogs", id as string);
           const docSnap = await getDoc(docRef);
-
           if (docSnap.exists()) {
             setBlog(docSnap.data() as Blog);
           } else {
-            setBlog(null); // Set to null if no blog is found
+            setBlog(null);
           }
         } catch (error) {
           console.error("Error fetching blog data:", error);
-          setBlog(null); // Set to null in case of an error
+          setBlog(null);
         }
       }
       setLoading(false);
     };
-
     fetchBlog();
   }, [id]);
 
@@ -65,17 +66,34 @@ const BlogDetail: React.FC = () => {
     if (id) {
       try {
         await deleteDoc(doc(db, "blogs", id as string));
-        router.push("/admin-dashboard"); // Redirect after deletion
+        router.push("/admin-dashboard");
       } catch (error) {
         console.error("Error deleting blog:", error);
       }
     }
   };
 
-  const renderContent = (content: string) => {
-    return content
-      .split("\n")
-      .map((paragraph, index) => <p key={index}>{paragraph}</p>);
+  const handleUpdate = async () => {
+    if (id && blog) {
+      try {
+        const docRef = doc(db, "blogs", id as string);
+        const updateData = {
+          title: blog.title,
+          content: blog.content,
+          imageUrl: blog.imageUrl,
+          author: blog.author,
+        };
+        await updateDoc(docRef, updateData);
+        alert("Blog updated successfully!");
+      } catch (error) {
+        console.error("Error updating blog:", error);
+      }
+    }
+  };
+
+  const handleContentChange = (event: any, editor: any) => {
+    const data = editor.getData();
+    setBlog({ ...blog, content: data } as Blog);
   };
 
   if (loading) {
@@ -104,13 +122,39 @@ const BlogDetail: React.FC = () => {
                   style={{ maxHeight: "400px", objectFit: "cover" }}
                 />
                 <div className="card-body">
-                  <h1 className="card-title mb-4">{blog.title}</h1>
-                  <h5 className="card-subtitle mb-3 text-muted">
+                  <h1
+                    className="card-title mb-4"
+                    style={{ fontSize: "2.5rem", fontWeight: "bold" }}
+                  >
+                    {blog.title}
+                  </h1>
+                  <h5
+                    className="card-subtitle mb-3 text-muted"
+                    style={{ fontSize: "1.2rem" }}
+                  >
                     By {blog.author}
                   </h5>
-                  <div className="card-text" style={{ lineHeight: "1.8" }}>
-                    {renderContent(blog.content)}
-                  </div>
+                  {isAdmin === true ? (
+                    <>
+                      <CKEditor
+                        editor={ClassicEditor}
+                        data={blog.content}
+                        onChange={handleContentChange}
+                      />
+                      <button
+                        className="btn btn-primary mt-3"
+                        onClick={handleUpdate}
+                      >
+                        Update Blog
+                      </button>
+                    </>
+                  ) : (
+                    <div
+                      className="card-text"
+                      style={{ lineHeight: "1.8" }}
+                      dangerouslySetInnerHTML={{ __html: blog.content }}
+                    />
+                  )}
                   {isAdmin === true && (
                     <button
                       className="btn btn-danger mt-3"
